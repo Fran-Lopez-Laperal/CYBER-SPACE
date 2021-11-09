@@ -1,5 +1,11 @@
 class Game {
-    constructor ()
+    constructor () {
+        this.canvas = document.getElementById(canvasId)
+        this.canvas.witdth = 400;
+        this.canvas.height = 600;
+        this.ctx = this.canvas.getContext('2d');
+        this.background = new Background(this.ctx);
+    }
 
 
     start() {
@@ -37,6 +43,7 @@ class Game {
     };
 
     draw() {
+        this.background.draw()
 
     };
 

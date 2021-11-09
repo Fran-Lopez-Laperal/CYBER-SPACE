@@ -1,5 +1,7 @@
 class Evils {
-    constructor ()
+    constructor (){
+        
+    }
 
 
 
