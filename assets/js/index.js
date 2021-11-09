@@ -1,1 +1,4 @@
-const game = new game("cyber-space");
+window.addEventListener('load',() => {
+    const game = new Game("cyber-space");
+    game.start();
+});
