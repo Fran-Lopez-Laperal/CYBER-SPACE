@@ -1,13 +1,14 @@
 class Game {
-    constructor (canvasGame) {
-        this.canvas = document.getElementById(canvasGame)
-        this.canvas.witdth = 400;
-        this.canvas.height = 600;
+    constructor (canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.canvas.width = 484;
+        this.canvas.height = 498;
         this.ctx = this.canvas.getContext('2d');
 
         this.drawIntervalId = undefined;
-        this.fps = 1000 / 60.
+        this.fps = 1000 / 60;
         this.background = new Background(this.ctx);
+        this.player = new Player(this.ctx, this.canvas.witdth / 2, this.canvas.height / 2);
     }
 
 
@@ -15,8 +16,9 @@ class Game {
         if(!this.drawIntervalId){
             this.drawIntervalId = setInterval(() => {
                 this.clear();
-                this.draw();
                 this.move()
+                this.draw();
+                 
             },this.fps);
         }
 
@@ -40,7 +42,7 @@ class Game {
 
 
     clear() {
-        this.canvas.clearRect(0, 0, this.canvas.witdth, this.canvas.height)
+        this.ctx.clearRect(0, 0, this.canvas.witdth, this.canvas.height)
     };
 
     
@@ -55,7 +57,8 @@ class Game {
     };
 
     draw() {
-        this.background.draw()
+        this.background.draw();
+        this.player.draw();
 
     };
 
