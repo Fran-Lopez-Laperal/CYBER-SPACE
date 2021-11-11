@@ -88,19 +88,19 @@ class Player {
     onKeyDown(code) {
         
         if (code === RIGHT_KEY){
-            this.vx = 10;
+            this.vx = 3;
         }
 
         if (code === LEFT_KEY){
-            this.vx = -10;
+            this.vx = -3;
         };
 
         if (code === DOWN_KEY){
-          this.vy = 10;
+          this.vy = 3;
         }
 
         if (code === UP_KEY){
-             this.vy = -10;
+             this.vy = -3;
         }; 
     };
 

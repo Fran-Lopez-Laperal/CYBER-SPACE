@@ -10,6 +10,7 @@ class Game {
         this.background = new Background(this.ctx);
         this.player = new Player(this.ctx, this.canvas.witdth / 2, this.canvas.height / 2);
         this.evils = [];
+        this.icons = [];
         
     }
 
@@ -26,20 +27,26 @@ class Game {
                
         
                 
-                this.evils.forEach(evil => {
-                    evil.draw(),
-                    evil.move()
-                });
+              
                 
-                if (this.tick % 200 === 0){
+                if (this.tick % 150 === 0){
                     const randomX = Math.random() * (this.ctx.canvas.width - 100);
                     const evil = new Evil(this.ctx, randomX);
                     this.evils.push(evil);
-                    //console.log("hay algun evil", this.evils)
+                    //console.log("is there any evil", this.evils)
                 }
 
 
-                
+
+                if (this.tick % 100 === 0){
+                    const randomE = Math.random() * (this.ctx.canvas.width - 100);
+                    const icon = new Icons(this.ctx, randomE);
+                    this.icons.push(icon);
+                    //console.log("is there any icon", this.icons)
+                    //console.log(randomE)
+                }
+
+
                 
                 
 
@@ -66,6 +73,15 @@ class Game {
     
     move() {
         this.player.move();
+
+        this.evils.forEach(evil => {
+            evil.move()
+        });
+
+
+        this.icons.forEach(icon =>{
+            icon.move()
+        });
 
     };
 
@@ -94,8 +110,14 @@ class Game {
     draw() {
         this.background.draw();
         this.player.draw();
+
+        this.evils.forEach(evil =>{
+            evil.draw()
+        });
         
-        
+        this.icons.forEach(icon =>{
+            icon.draw()
+        });
 
         
 
