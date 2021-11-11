@@ -1,5 +1,8 @@
 class Icons {
-    constructor (){
+    constructor (ctx,x){
+        this.ctx = ctx;
+        this.x = x;
+        this.y = 
 
     };
 

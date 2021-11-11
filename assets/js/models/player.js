@@ -10,7 +10,7 @@ class Player {
         
         
         this.sprite = new Image();
-        this.sprite.src = "assets/img/player-1.png";
+        this.sprite.src = "assets/img/player-1 (1).png";
         this.sprite.frameIndex = 0;
         this.tick = 0;
     };
