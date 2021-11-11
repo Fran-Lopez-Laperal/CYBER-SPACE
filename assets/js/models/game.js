@@ -9,6 +9,8 @@ class Game {
         this.fps = 1000 / 60;
         this.background = new Background(this.ctx);
         this.player = new Player(this.ctx, this.canvas.witdth / 2, this.canvas.height / 2);
+        this.evils = new Evils = [];
+        
     }
 
 
@@ -16,15 +18,15 @@ class Game {
         if(!this.drawIntervalId){
             this.drawIntervalId = setInterval(() => {
                 this.clear();
-                this.move()
+                this.move();
                 this.draw();
                  
             },this.fps);
         }
-
+        
     };
 
-
+    
     restart() {
     };
 
@@ -38,11 +40,12 @@ class Game {
 
     
     move() {
+        this.player.move();
     };
 
 
     clear() {
-        this.ctx.clearRect(0, 0, this.canvas.witdth, this.canvas.height)
+        //this.ctx.clearRect(0, 0, this.canvas.witdth, this.canvas.height)
     };
 
     
@@ -50,7 +53,13 @@ class Game {
     addEvils() {
     };
 
+    onKeyDown(code){
+        this.player.onKeyDown(code);
+    }
 
+    onKeyUp(code){
+        this.player.onKeyUp(code);
+    }
     
 
     checkScore() {
