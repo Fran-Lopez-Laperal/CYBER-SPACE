@@ -7,6 +7,8 @@ window.addEventListener('load',() => {
 
     document.addEventListener('keyup',(event)=>  game.onKeyUp(event.keyCode));
 
+    
+
 });
 
 

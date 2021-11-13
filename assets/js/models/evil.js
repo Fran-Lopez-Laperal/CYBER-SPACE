@@ -2,23 +2,21 @@ class Evil {
     constructor (ctx, x){
         this.x = x;
         this.ctx = ctx;
-        this.y = 30;
+        this.y = 1;
         this.w = 30;
         this.h = 30;
         this.vx = 1;
-        this.vy = 1;
+        this.vy = 0.5;
+        this.hitted = false
 
         this.evils = new Image();
-        this.evils.src = "assets/img/player.png"
-
-
+        this.evils.src = "assets/img/evil.png"
         
     };
 
 
 
     draw() {    
-
         this.ctx.drawImage(this.evils, this.x, this.y, this.w, this.h)
     };
 
@@ -36,7 +34,7 @@ class Evil {
         
 
 
-        if (this.y + this.h >= this.ctx.canvas.height || this.y <= 0){
+        if (this.y <= 0){
             this.vy = -this.vy
         }
     }

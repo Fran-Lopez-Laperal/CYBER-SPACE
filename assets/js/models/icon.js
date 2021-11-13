@@ -1,12 +1,14 @@
+
 class Icons {
     constructor (ctx, x){
         this.x = x;
         this.ctx = ctx;
         this.y = 40;
-        this.w = 40;
+        this.w = 50;
         this.h = 40;
-        this.vx = 1
-        this.vy = 1;
+        this.vx = 0.5
+        this.vy = 0.5;
+        this.life = false;
 
         this.icons = new Image();
         this.icons.src = "assets/img/icon.png"
@@ -24,15 +26,20 @@ class Icons {
         this.x += this.vx;
 
 
-        if(this.x + this.w >= this.ctx.canvas.width){
+        if(this.x + this.w >= this.ctx.canvas.width || this.x <= 0){
             this.vx = -this.vx
         }
 
 
-        if ( this.y + this.h >= this.ctx.canvas.height){
+        if ( this.y + this.h >= this.ctx.canvas.height || this.y <= 0){
             this.vy = -this.vy
         }
     };
+
+
+        
+
+
 
 
     addScore() {
