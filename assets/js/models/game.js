@@ -42,12 +42,13 @@ class Game {
 
         if (this.tick % 100 === 0) {
           const randomX = Math.random() * (this.ctx.canvas.width - 100);
-          const evil = new Evil(this.ctx, randomX);
+          const randomY = Math.random() * (this.ctx.canvas.height - 100);
+          const evil = new Evil(this.ctx, randomX, randomY);
           this.evils.push(evil);
           //console.log("is there any evil", this.evils)
         }
 
-        if (this.tick % 100 === 0) {
+        if (this.tick % 700 === 0) {
           const randomX = Math.random() * (this.ctx.canvas.height - 100);
           const randomY = Math.random() * (this.ctx.canvas.width - 100);
           const icon = new Icons(this.ctx, randomX, randomY);
@@ -68,10 +69,6 @@ class Game {
 
   end() {
     this.stop();
-  }
-
-  gameOver() {
-    
   }
 
   clear() {
@@ -115,8 +112,8 @@ class Game {
     }
 
     if (this.healthBar.isEmpty()) {
-      this.gameOver();
-      //TODO: llamar e implementar Game Over.
+      this.stop();
+      //TODO: llamar e implementar Game Over
     }
   }
 

@@ -1,8 +1,8 @@
 class Evil {
-    constructor (ctx, x){
+    constructor (ctx, x, y){
         this.x = x;
         this.ctx = ctx;
-        this.y = 1;
+        this.y = y;
         this.w = 30;
         this.h = 30;
         this.vx = 1;

@@ -7,7 +7,13 @@ class GameOver {
         this.h = 50;
 
 
-        this.gameOver= new Image();
+        this.gameOver = new Image();
         this.gameOver.src = "assets/img/gameover.jpeg"
     }
+
+    draw() {
+        this.ctx.drawImage(this.gameOver, this.x, this.y, this.w, this.h)
+    }
+
+    
 }
