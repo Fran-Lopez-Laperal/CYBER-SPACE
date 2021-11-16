@@ -6,8 +6,8 @@ class Icons {
         this.y = 40;
         this.w = 50;
         this.h = 40;
-        this.vx = 0.5
-        this.vy = 0.5;
+        this.vx = 0.1
+        this.vy = 0.09;
         this.life = false;
 
         this.icons = new Image();

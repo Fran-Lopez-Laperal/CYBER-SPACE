@@ -1,19 +1,22 @@
 class Game {
     constructor (canvasId) {
         this.canvas = document.getElementById(canvasId);
-        this.canvas.width = 300;
+        this.canvas.width = 450;
         this.canvas.height = 500;
         this.ctx = this.canvas.getContext('2d');
         this.tick = 0;
         this.drawIntervalId = undefined;
         this.fps = 1000 / 60;
         this.background = new Background(this.ctx);
-        this.player = new Player(this.ctx, this.canvas.witdth / 2, this.canvas.height / 2);
+        this.player = new Player(this.ctx, this.canvas.witdth / 2, this.canvas.height / 3);
+        this.healthBar = new Healthbar(this.ctx, 100, 470, 200, 9, 100, "#1FF50A");
         this.evils = [];
         this.icons = [];
-        this.score = 0;
+        this.score = 100;
         this.life = 0;
         
+        
+       
 
         this.audio = new Audio();
         this.audio.src = "assets/audio/sound.mp3";
@@ -30,14 +33,15 @@ class Game {
                 this.clear();
                 this.move();
                 this.draw();
-                this.checkScore();
-                this.checkLife();
+                this.restLife();
+                this.sumLife();
+                this.healthPlayer();
                 this.checkColisions();
                 
 
 
    
-                if (this.tick % 300 === 0){
+                if (this.tick % 100 === 0){
                     const randomX = Math.random() * (this.ctx.canvas.width - 100);
                     const evil = new Evil(this.ctx, randomX);
                     this.evils.push(evil);
@@ -46,7 +50,7 @@ class Game {
 
 
 
-                if (this.tick % 200 === 0){
+                if (this.tick % 700 === 0){
                     const randomE = Math.random() * (this.ctx.canvas.width - 100);
                     const icon = new Icons(this.ctx, randomE);
                     this.icons.push(icon);
@@ -96,7 +100,12 @@ class Game {
             icon.move()
         });
 
+        //this.background.move();
+
     };
+
+
+
 
 
    
@@ -121,14 +130,14 @@ class Game {
             
         }
 
-        const sumLife = this.icons.find(icon => this.player.collides(icon))
-        if (sumLife) {
-            sumLife.life = true 
+        const friend = this.icons.find(icon => this.player.collides(icon))
+        if (friend) {
+            friend.life = true 
 
         }
     }
 
-    checkScore() {
+    restLife() {
        const scoreEvils = this.evils.filter(evil => 
             evil.x < this.player.x + this.player.w &&
             evil.x + evil.w > this.player.x &&
@@ -139,13 +148,11 @@ class Game {
 
         scoreEvils.forEach(evil => evil.hitted = true)
 
-        this.score += scoreEvils.length;
-
-        
+        this.score -= scoreEvils.length ;
         
     };
 
-    checkLife(){
+    sumLife() {
 
         const scoreLife = this.icons.filter(icon =>
             icon.x < this.player.x + this.player.w &&
@@ -155,17 +162,25 @@ class Game {
         )
             
             scoreLife.forEach(icon => icon.life = true)
-            this.life += scoreLife.length
+            
+            this.life += scoreLife.length;
 
     };
 
+
+    healthPlayer() {
+        
+    }
+
     draw() {
-        this.evils = this.evils.filter(evil => !evil.hitted)
+        this.evils = this.evils.filter(evil => !evil.hitted);
 
-        this.icons = this.icons.filter (icon => !icon.life)
+        this.icons = this.icons.filter (icon => !icon.life);
 
+      
         this.background.draw();
         this.player.draw();
+        this.healthBar.draw();
 
         this.evils.forEach(evil =>{
             evil.draw()
@@ -180,10 +195,8 @@ class Game {
         this.ctx.font = '200px';
         this.ctx.fillStyle = 'red';        
         this.ctx.fillText(this.score, 20, 100);
-        this.ctx.fillText(this.life, 20, 110)
-        
-        
-
+        this.ctx.fillText(this.life, 20, 110);
+       
     };
 
 
