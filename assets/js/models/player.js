@@ -78,10 +78,6 @@ class Player {
     shooting() {    
     };
 
-
-
-    addScore() {    
-    }
     
 
 

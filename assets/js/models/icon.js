@@ -1,13 +1,13 @@
 
 class Icons {
-    constructor (ctx, x){
+    constructor (ctx, x, y){
         this.x = x;
         this.ctx = ctx;
-        this.y = 40;
+        this.y = y;
         this.w = 50;
         this.h = 40;
-        this.vx = 0.1
-        this.vy = 0.09;
+        this.vx = 0;
+        this.vy = 0;
         this.life = false;
 
         this.icons = new Image();
@@ -21,20 +21,20 @@ class Icons {
         this.ctx.drawImage(this.icons, this.x, this.y, this.w, this.h)
     };
 
-    move () {
-        this.y += this.vy;
-        this.x += this.vx;
+    // move () {
+    //     this.y += this.vy;
+    //     this.x += this.vx;
 
 
-        if(this.x + this.w >= this.ctx.canvas.width || this.x <= 0){
-            this.vx = -this.vx
-        }
+    //     if(this.x + this.w >= this.ctx.canvas.width || this.x <= 0){
+    //         this.vx = -this.vx
+    //     }
 
 
-        if ( this.y + this.h >= this.ctx.canvas.height || this.y <= 0){
-            this.vy = -this.vy
-        }
-    };
+    //     if ( this.y + this.h >= this.ctx.canvas.height || this.y <= 0){
+    //         this.vy = -this.vy
+    //     }
+    // };
 
 
         

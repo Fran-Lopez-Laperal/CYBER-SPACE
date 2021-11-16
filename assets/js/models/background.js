@@ -23,11 +23,11 @@ class Background  {
         }
         
         
-        move() {
-        // Añadir parámetros para mover la imagen
+    move() {
+    // Añadir parámetros para mover la imagen
         this.y += this.vy;
 
-        if(this.y <= -this.h){
+        if(this.y + this.height <= 0){
             this.y = 0;
         }
     }
