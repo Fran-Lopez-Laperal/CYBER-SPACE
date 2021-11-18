@@ -1,6 +1,7 @@
 class Game {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
+    this.onGameOver = () => {};
     this.canvas.width = 450;
     this.canvas.height = 500;
     this.ctx = this.canvas.getContext("2d");
@@ -15,6 +16,7 @@ class Game {
     );
     this.evils = [];
     this.icons = [];
+    //this.monster = new Monster(this.ctx);
     this.score = 10;
     this.life = 0;
     this.healthBar = new Healthbar(
@@ -25,16 +27,14 @@ class Game {
       9,
       "#1FF50A"
     );
-
-    this.audio = new Audio();
-    this.audio.src = "assets/audio/sound.mp3";
   }
 
   start() {
     if (!this.drawIntervalId) {
       this.drawIntervalId = setInterval(() => {
         this.tick++;
-
+        this.audio = new Audio();
+        this.audio.src = "assets/audio/voxel-revolution.mp3";
         this.clear();
         this.move();
         this.draw();
@@ -48,7 +48,7 @@ class Game {
           //console.log("is there any evil", this.evils)
         }
 
-        if (this.tick % 700 === 0) {
+        if (this.tick % 800 === 0) {
           const randomX = Math.random() * (this.ctx.canvas.height - 100);
           const randomY = Math.random() * (this.ctx.canvas.width - 100);
           const icon = new Icons(this.ctx, randomX, randomY);
@@ -69,6 +69,7 @@ class Game {
 
   end() {
     this.stop();
+    this.onGameOver();
   }
 
   clear() {
@@ -82,6 +83,7 @@ class Game {
       evil.move();
     });
 
+   
     // this.icons.forEach(icon =>{
     //     icon.move()
     // });
@@ -111,6 +113,19 @@ class Game {
       friend.life = true;
     }
 
+    for (let i = 0; i < this.player.bullets.length; i++) {
+      const bullet = this.player.bullets[i];
+      for (let j = 0; j < this.evils.length; j++) {
+        const enemy = this.evils[j];
+
+        if (bullet.collides(enemy)) {
+          this.player.bullets.splice(i, 1);
+          this.evils.splice(j, 1);
+          break;
+        }
+      }
+    }
+
     if (this.healthBar.isEmpty()) {
       this.stop();
       //TODO: llamar e implementar Game Over
@@ -122,8 +137,11 @@ class Game {
 
     this.icons = this.icons.filter((icon) => !icon.life);
 
+   
+
     this.background.draw();
     this.player.draw();
+    
     this.healthBar.draw();
 
     this.evils.forEach((evil) => {

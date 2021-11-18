@@ -1,19 +1,16 @@
 class GameOver {
-    constructor(ctx){
-        this.ctx =  ctx;
-        this.x = 100;
-        this.y = 100;
-        this.w = 50;
-        this.h = 50;
+  constructor(ctx) {
+    this.ctx = ctx;
+    this.x = 100;
+    this.y = 100;
+    this.w = 50;
+    this.h = 50;
 
+    this.gameOver = new Image();
+    this.gameOver.src = "assets/img/gameover.jpeg";
+  }
 
-        this.gameOver = new Image();
-        this.gameOver.src = "assets/img/gameover.jpeg"
-    }
-
-    draw() {
-        this.ctx.drawImage(this.gameOver, this.x, this.y, this.w, this.h)
-    }
-
-    
+  draw() {
+    this.ctx.drawImage(this.gameOver, this.x, this.y, this.w, this.h);
+  }
 }
