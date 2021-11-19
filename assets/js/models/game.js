@@ -14,9 +14,13 @@ class Game {
       this.canvas.witdth / 2,
       this.canvas.height / 3
     );
+    this.monster = new Monster(
+      this.ctx,
+      this.canvas.witdth / 2,
+      this.canvas.height / 3
+    );
     this.evils = [];
     this.icons = [];
-    //this.monster = new Monster(this.ctx);
     this.score = 10;
     this.life = 0;
     this.healthBar = new Healthbar(
@@ -55,6 +59,10 @@ class Game {
           this.icons.push(icon);
           //console.log("is there any icon", this.icons)
           //console.log(randomE)
+
+          // if (this.tick % 1000 === 0) {
+          //   const randomM = Math.random() * (this.ctx.canvas.height - 100);
+          // }
         }
       }, this.fps);
     }
@@ -78,12 +86,12 @@ class Game {
 
   move() {
     this.player.move();
+    this.monster.move()
 
     this.evils.forEach((evil) => {
       evil.move();
     });
 
-   
     // this.icons.forEach(icon =>{
     //     icon.move()
     // });
@@ -137,11 +145,11 @@ class Game {
 
     this.icons = this.icons.filter((icon) => !icon.life);
 
-   
+    this.monster.draw();
 
     this.background.draw();
     this.player.draw();
-    
+
     this.healthBar.draw();
 
     this.evils.forEach((evil) => {
@@ -151,5 +159,8 @@ class Game {
     this.icons.forEach((icon) => {
       icon.draw();
     });
+
+
+    this.ctx.fillText = 100;
   }
 }
