@@ -1,8 +1,8 @@
 class Heart {
   constructor(ctx) {
     this.ctx = ctx;
-    this.x = 65;
-    this.y = 460;
+    this.x = 165;
+    this.y = 860;
     this.w = 30;
     this.h = 30;
 

@@ -2,8 +2,8 @@ class Game {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
     this.onGameOver = () => {};
-    this.canvas.width = 450;
-    this.canvas.height = 500;
+    this.canvas.width = 700;
+    this.canvas.height = 940;
     this.ctx = this.canvas.getContext("2d");
     this.eviltick = 0;
     this.icontick = 0;
@@ -22,7 +22,7 @@ class Game {
     this.score = new Score(this.ctx);
     this.bestScore = 0;
     this.life = 0;
-    this.healthBar = new Healthbar(this.ctx, 100, 470, 200, 9, "#1FF50A");
+    this.healthBar = new Healthbar(this.ctx, 200, 870, 200, 9, "#1FF50A");
   }
 
   start() {

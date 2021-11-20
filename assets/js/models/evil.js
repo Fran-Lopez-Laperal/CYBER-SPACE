@@ -3,8 +3,8 @@ class Evil {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.w = 30;
-    this.h = 30;
+    this.w = 40;
+    this.h = 40;
     this.vx = 3;
     this.vy = 0.5;
     this.hitted = false;

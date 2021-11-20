@@ -1,8 +1,8 @@
 class Score {
   constructor(ctx) {
     this.ctx = ctx;
-    this.x = 305;
-    this.y = 460;
+    this.x = 405;
+    this.y = 860;
     this.h = 25;
     this.w = 25;
     this.value = 0;

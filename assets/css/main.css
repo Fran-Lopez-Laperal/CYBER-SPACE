@@ -1,5 +1,11 @@
 canvas {
+    background-color:white ;
     border : 1px dotted;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 body {
@@ -7,3 +13,18 @@ body {
 }
 
 
+#panel {
+    height: 100vh;
+    width: 100vw;
+    background-repeat:repeat;
+    background-image:url();
+    position: relative;
+
+
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+}

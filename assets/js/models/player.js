@@ -1,10 +1,10 @@
 class Player {
   constructor(ctx) {
     this.ctx = ctx;
-    this.x = 200;
-    this.y = 400;
-    this.w = 40;
-    this.h = 25;
+    this.x = 320;
+    this.y = 800;
+    this.w = 70;
+    this.h = 35;
     this.vx = 0;
     this.vy = 0;
 
