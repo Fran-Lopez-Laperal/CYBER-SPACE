@@ -5,7 +5,7 @@ class Bullet {
     this.y = y;
     this.w = 10;
     this.h = 20;
-    this.vy = 2;
+    this.vy = 5;
 
     this.bullet = new Image();
     this.bullet.src = "assets/img/bullet.png";

@@ -5,7 +5,9 @@ class Game {
     this.canvas.width = 450;
     this.canvas.height = 500;
     this.ctx = this.canvas.getContext("2d");
-    this.tick = 0;
+    this.eviltick = 0;
+    this.icontick = 0;
+    this.monstertick = 0;
     this.drawIntervalId = undefined;
     this.fps = 1000 / 60;
     this.background = new Background(this.ctx);
@@ -14,29 +16,21 @@ class Game {
       this.canvas.witdth / 2,
       this.canvas.height / 3
     );
-    this.monster = new Monster(
-      this.ctx,
-      this.canvas.witdth / 2,
-      this.canvas.height / 3
-    );
     this.evils = [];
     this.icons = [];
-    this.score = 10;
+    this.monsters = [];
+    this.score = new Score(this.ctx);
+    this.bestScore = 0;
     this.life = 0;
-    this.healthBar = new Healthbar(
-      this.ctx,
-      100,
-      470,
-      this.score * 20,
-      9,
-      "#1FF50A"
-    );
+    this.healthBar = new Healthbar(this.ctx, 100, 470, 200, 9, "#1FF50A");
   }
 
   start() {
     if (!this.drawIntervalId) {
       this.drawIntervalId = setInterval(() => {
-        this.tick++;
+        this.eviltick++;
+        this.icontick++;
+        this.monstertick++;
         this.audio = new Audio();
         this.audio.src = "assets/audio/voxel-revolution.mp3";
         this.clear();
@@ -44,7 +38,7 @@ class Game {
         this.draw();
         this.checkColisions();
 
-        if (this.tick % 100 === 0) {
+        if (this.eviltick % 100 === 0) {
           const randomX = Math.random() * (this.ctx.canvas.width - 100);
           const randomY = Math.random() * (this.ctx.canvas.height - 100);
           const evil = new Evil(this.ctx, randomX, randomY);
@@ -52,17 +46,20 @@ class Game {
           //console.log("is there any evil", this.evils)
         }
 
-        if (this.tick % 800 === 0) {
+        if (this.icontick % 800 === 0) {
           const randomX = Math.random() * (this.ctx.canvas.height - 100);
           const randomY = Math.random() * (this.ctx.canvas.width - 100);
           const icon = new Icons(this.ctx, randomX, randomY);
           this.icons.push(icon);
           //console.log("is there any icon", this.icons)
           //console.log(randomE)
-
-          // if (this.tick % 1000 === 0) {
-          //   const randomM = Math.random() * (this.ctx.canvas.height - 100);
-          // }
+        }
+        if (this.monstertick % 300 === 0) {
+          const randomX = Math.random() * (this.ctx.canvas.height - 100);
+          const randomY = Math.random() * (this.ctx.canvas.width - 100);
+          const monster = new Monster(this.ctx, randomX, randomY);
+          this.monsters.push(monster);
+          // console.log(monster);
         }
       }, this.fps);
     }
@@ -86,11 +83,10 @@ class Game {
 
   move() {
     this.player.move();
-    this.monster.move()
 
-    this.evils.forEach((evil) => {
-      evil.move();
-    });
+    this.monsters.forEach((monster) => monster.move());
+
+    this.evils.forEach((evil) => evil.move());
 
     // this.icons.forEach(icon =>{
     //     icon.move()
@@ -111,7 +107,7 @@ class Game {
     const enemy = this.evils.find((evil) => this.player.collides(evil));
     if (enemy) {
       enemy.hitted = true;
-      this.score -= 1;
+
       this.healthBar.decrease();
     }
 
@@ -119,6 +115,15 @@ class Game {
     if (friend) {
       this.healthBar.increase();
       friend.life = true;
+    }
+
+    const monster = this.monsters.find((monster) =>
+      this.player.collides(monster)
+    );
+    if (monster) {
+      monster.hitted = true;
+
+      this.healthBar.decrease();
     }
 
     for (let i = 0; i < this.player.bullets.length; i++) {
@@ -129,7 +134,23 @@ class Game {
         if (bullet.collides(enemy)) {
           this.player.bullets.splice(i, 1);
           this.evils.splice(j, 1);
+          this.score.increase();
           break;
+        }
+      }
+      for (let k = 0; k < this.monsters.length; k++) {
+        const monster = this.monsters[k];
+
+        if (bullet.collides(monster)) {
+          //resto a monster 1 a sus vidas, por tanto hay que crear this.monster.lifes en el constructor de monster
+          this.player.bullets.splice(i, 1);
+          monster.lifes--
+          
+          if(monster.lifes <= 0){
+            this.monsters.splice(k, 1)
+            this.score.increase(10)
+          }
+          
         }
       }
     }
@@ -145,12 +166,13 @@ class Game {
 
     this.icons = this.icons.filter((icon) => !icon.life);
 
-    this.monster.draw();
+    this.monsters = this.monsters.filter((monster) => !monster.hitted);
 
     this.background.draw();
     this.player.draw();
 
     this.healthBar.draw();
+    this.score.draw();
 
     this.evils.forEach((evil) => {
       evil.draw();
@@ -160,7 +182,8 @@ class Game {
       icon.draw();
     });
 
-
-    this.ctx.fillText = 100;
+    this.monsters.forEach((monster) => {
+      monster.draw();
+    });
   }
 }
