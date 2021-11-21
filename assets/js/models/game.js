@@ -154,6 +154,19 @@ class Game {
         }
       }
     }
+    // for(let i = 0; i< this.monsters.rocks.length; i++){
+    //   const rocks = this.monsters.rocks[i];
+    //   for (let j = 0; j < this.player.length; j++){
+    //     const player = this.player;
+
+    //     if(rocks.collides(player)){
+    //       this.monster.rocks.aplice(i, 1);
+    //       this.player.splice(j, 1)
+    //       this.healthBar.decrease()
+    //     }
+    //   }
+    // }
+    
 
     if (this.healthBar.isEmpty()) {
       this.stop();
