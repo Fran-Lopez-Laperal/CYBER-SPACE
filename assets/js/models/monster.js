@@ -3,44 +3,42 @@ class Monster {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.w = 50;
-    this.h = 50;
-    this.vx = 0.2;
-    this.vy = 0.2;
+    this.w = 90;
+    this.h = 90;
+    this.vx = 1;
+    this.vy = 1;
     this.hitted = false;
-    this.lifes = 10;
+    this.lifes = 15;
 
     this.sprite = new Image();
     this.sprite.src = "assets/img/monster.png";
     this.sprite.frameIndex = 0;
     this.tick = 0;
     this.rocks = [];
-    this.reloading = false;
   }
 
   monstershoot() {
     this.rocks.push(new Rocks(this.ctx, this.x, this.y));
-    this.reloading = true;
-    setTimeout(()=> this.reloading = false, 1000)
   }
 
   draw() {
     this.tick++;
 
-    this.ctx.drawImage(this.sprite,
+    this.ctx.drawImage(
+      this.sprite,
       (this.sprite.frameIndex * this.sprite.width) / 3,
       0,
       this.sprite.width / 3,
       this.sprite.height,
-      this.x, 
-      this.y, 
+      this.x,
+      this.y,
       this.w,
-       this.h);
+      this.h
+    );
 
-
-       this.rocks.forEach((rock) => {
-         rock.draw();
-       });     
+    this.rocks.forEach((rock) => {
+      rock.draw();
+    });
   }
 
   move() {
@@ -58,12 +56,10 @@ class Monster {
     if (this.thick % 10 === 0) {
       this.sprite.frameIndex += 1;
     }
-    
+
     if (this.sprite.frameIndex > 2) {
       this.sprite.frameIndex = 0;
-      
     }
-    this.rocks.forEach((rock)=>
-    rock.draw());
+    this.rocks.forEach((rock) => rock.draw());
   }
 }

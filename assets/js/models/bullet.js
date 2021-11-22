@@ -3,12 +3,12 @@ class Bullet {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.w = 10;
+    this.w = 20;
     this.h = 20;
     this.vy = 5;
 
     this.bullet = new Image();
-    this.bullet.src = "assets/img/bullet.png";
+    this.bullet.src = "assets/img/simbol.png";
   }
 
   draw() {

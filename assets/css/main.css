@@ -1,10 +1,10 @@
 canvas {
     background-color:white ;
-    border : 1px dotted;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: 4px dotted, red;
 
 }
 
@@ -12,21 +12,63 @@ body {
     font-family: games;
 }
 
-
 #panel {
-    width: 100vw;
-    height: 100vh;
-    background-repeat: repeat;
-    background-image: url(https://cdelatorre.github.io/game_project_1/images/fondo.jpg);
-    position: relative;
-    size: cover;
-
-
-    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    text-align: center;
+    border: solid, red;
+    font-family: games;
+}
+#bg {
+    position:fixed; 
+    top: 0; 
+    left: 0; 
+    min-width: 100%;
+    min-height: 100%; 
+    background-size:cover
 }
 
 
 body{
     margin: 0;
     padding: 0;
+}
+
+
+h1 {
+    font-size: 90px;
+    font-family: games;
+    color: darkblue;
+    text-shadow:#547ae4 8px 20px 9px;
+}
+
+
+
+#start-btn {
+    background-color: rgb(36, 240, 9);
+    padding: 9px 50px;
+    margin: 30px;
+    font-family: games;
+    font-size: 60px;
+    text-align:start;
+    border-bottom: rgb(235, 12, 235), 2px;
+   
+    
+}
+
+.link-btn{
+    text-align: center;
+    font-size: 30px;
+    color: darkblue;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+#head-options{
+    border: 2px solid rgb(6, 219, 35);
+    padding:  9px 70px;
+    margin: 100px;
 }

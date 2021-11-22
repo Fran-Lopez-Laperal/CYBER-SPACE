@@ -46,7 +46,7 @@ class Game {
           //console.log("is there any evil", this.evils)
         }
 
-        if (this.icontick % 800 === 0) {
+        if (this.icontick % 700 === 0) {
           const randomX = Math.random() * (this.ctx.canvas.height - 100);
           const randomY = Math.random() * (this.ctx.canvas.width - 100);
           const icon = new Icons(this.ctx, randomX, randomY);
@@ -54,7 +54,7 @@ class Game {
           //console.log("is there any icon", this.icons)
           //console.log(randomE)
         }
-        if (this.monstertick % 300 === 0) {
+        if (this.monstertick % 800 === 0) {
           const randomX = Math.random() * (this.ctx.canvas.height - 100);
           const randomY = Math.random() * (this.ctx.canvas.width - 100);
           const monster = new Monster(this.ctx, randomX, randomY);

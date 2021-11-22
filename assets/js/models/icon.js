@@ -3,8 +3,8 @@ class Icons {
     this.x = x;
     this.ctx = ctx;
     this.y = y;
-    this.w = 50;
-    this.h = 40;
+    this.w = 130;
+    this.h = 120;
     this.vx = 0;
     this.vy = 0;
     this.life = false;
